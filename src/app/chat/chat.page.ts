@@ -1,6 +1,9 @@
+import { getLocaleTimeFormat } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IonContent } from '@ionic/angular';
+import { HomePage } from '../home/home.page';
+
 
 @Component({
   selector: 'app-chat',
@@ -17,11 +20,12 @@ export class ChatPage implements OnInit {
   toUser: string = "HealthBot";
   start_typing: any;
   loader: boolean;
-
+  valor : any = HomePage.valor;
 
   constructor(public activRoute: ActivatedRoute) {
     this.activRoute.params.subscribe((params) => {
       // console.log(params)
+
       this.paramData = params
       this.userName = params.name
     });
@@ -30,7 +34,7 @@ export class ChatPage implements OnInit {
         userId: "HealthBot",
         userName: "HealthBot",
         userAvatar: "../../../assets/chat/Anonimo.png",
-        time: "12:00",
+        time: Date(),
         message: "Olá, aqui voce pode fazer sua denuncia sem ser identificado",
         id: 0
       }
@@ -84,3 +88,4 @@ export class ChatPage implements OnInit {
     this.scrollDown()
   }
 }
+
