@@ -1,6 +1,7 @@
 import { getLocaleTimeFormat } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { IonContent } from '@ionic/angular';
 import { HomePage } from '../home/home.page';
 
@@ -11,6 +12,8 @@ import { HomePage } from '../home/home.page';
   styleUrls: ['./chat.page.scss'],
 })
 export class ChatPage implements OnInit {
+  lat;
+  lng;
   @ViewChild('IonContent', { static: true }) content: IonContent
   paramData: any;
   msgList: any;
@@ -22,10 +25,10 @@ export class ChatPage implements OnInit {
   loader: boolean;
   valor : any = HomePage.valor;
 
-  constructor(public activRoute: ActivatedRoute) {
+  constructor(public activRoute: ActivatedRoute, private geo: Geolocation) {
     this.activRoute.params.subscribe((params) => {
       // console.log(params)
-
+      
       this.paramData = params
       this.userName = params.name
     });
@@ -86,6 +89,18 @@ export class ChatPage implements OnInit {
     // console.log(event);
     this.start_typing = event.target.value;
     this.scrollDown()
+  }
+
+  whereIam(){
+    this.geo.getCurrentPosition({
+      timeout: 10000,
+      enableHighAccuracy: true
+    }).then((res)=>{
+      this.lat = res.coords.latitude;
+      this.lng = res.coords.longitude;
+    }).catch((e)=>{
+      console.log(e);
+    })
   }
 }
 

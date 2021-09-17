@@ -286,4 +286,11 @@ ion-content {
   img {
     border-radius: 50%;
   }
-  
+  //To make item in center
+  .conteiner{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
