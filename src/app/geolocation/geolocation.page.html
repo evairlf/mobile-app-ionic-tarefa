@@ -7,6 +7,12 @@
 <ion-content>
   <div class="conteiner">
     <p>Lat: {{lat}}, Lng: {{lng}}</p>
+    
     <ion-button (click)="whereIam()">geolocation</ion-button>
+    <ion-button (click)="takePhoto()">Camera</ion-button>
+    <div *ngIf="clickedImage">
+      <ion-img [src]="clickedImage"></ion-img>
+    </div>
+    
   </div>
 </ion-content>

@@ -1,7 +1,6 @@
 {
   "name": "app-Denuncia",
   "integrations": {
-    "capacitor": {},
     "cordova": {}
   },
   "type": "angular"

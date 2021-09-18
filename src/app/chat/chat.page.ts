@@ -3,7 +3,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { IonContent } from '@ionic/angular';
-import { HomePage } from '../home/home.page';
 
 
 @Component({
@@ -23,12 +22,12 @@ export class ChatPage implements OnInit {
   toUser: string = "HealthBot";
   start_typing: any;
   loader: boolean;
-  valor : any = HomePage.valor;
 
   constructor(public activRoute: ActivatedRoute, private geo: Geolocation) {
     this.activRoute.params.subscribe((params) => {
       // console.log(params)
       
+      //alert(global.vare);
       this.paramData = params
       this.userName = params.name
     });
@@ -102,5 +101,7 @@ export class ChatPage implements OnInit {
       console.log(e);
     })
   }
+
+  
 }
 
