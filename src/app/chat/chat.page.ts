@@ -1,9 +1,9 @@
-import { getLocaleTimeFormat } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { IonContent } from '@ionic/angular';
-
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { format } from 'url';
 
 @Component({
   selector: 'app-chat',
@@ -22,20 +22,21 @@ export class ChatPage implements OnInit {
   toUser: string = "HealthBot";
   start_typing: any;
   loader: boolean;
-
-  constructor(public activRoute: ActivatedRoute, private geo: Geolocation) {
+  clickedImage: any = null;
+  mensagem: boolean = true;
+  vare : string = "Denúncias";
+  constructor(public activRoute: ActivatedRoute, private geo: Geolocation, private camera: Camera) {
     this.activRoute.params.subscribe((params) => {
       // console.log(params)
       
-      //alert(global.vare);
       this.paramData = params
       this.userName = params.name
     });
     this.msgList = [
       {
-        userId: "HealthBot",
-        userName: "HealthBot",
-        userAvatar: "../../../assets/chat/Anonimo.png",
+        userId: "Me",
+        userName: "Me",
+        userAvatar: "../../../assets/chat/hUopdv01.png",
         time: Date(),
         message: "Olá, aqui voce pode fazer sua denuncia sem ser identificado",
         id: 0
@@ -59,7 +60,7 @@ export class ChatPage implements OnInit {
       this.scrollDown()
       setTimeout(() => {
         this.senderSends()
-      }, 500);
+      }, 10000000);
 
     }
   }
@@ -102,6 +103,25 @@ export class ChatPage implements OnInit {
     })
   }
 
+  takePhoto(){
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    
+    this.camera.getPicture(options).then((imageData) => {
+     // imageData is either a base64 encoded string or a file URI
+     // If it's base64 (DATA_URL):
+     let base64Image = 'data:image/jpeg;base64,' + imageData;
+     this.clickedImage = base64Image;
+     this.sendMsg();
+    }, (err) => {
+     // Handle error
+     alert('sem camera no pc');
+    });
+  }
   
 }
 

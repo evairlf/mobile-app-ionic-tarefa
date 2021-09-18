@@ -3,7 +3,7 @@
     <name>Aplicativo de denuncias</name>
     <description>Aplicativo de denuncias</description>
     <author email="evairleitefeldmann@gmail.com" href="http://evairleitefeldmann.com/">Tarefa Faculdade Unisinos</author>
-    <content original-src="index.html" src="http://localhost:8101" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

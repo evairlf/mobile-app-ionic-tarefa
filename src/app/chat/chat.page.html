@@ -38,6 +38,7 @@
               'sharper-top':(msgList[i-1] && msgList[i-1].userId === chat.userId),
               'sharper-bottom':(msgList[i+1] && msgList[i+1].userId === chat.userId)}">
                 <p class="ion-text-wrap" class="ion-padding">{{chat.message}}
+                  
                 </p>
                 <div class="corner-parent-right">
                   <div class="corner-child-right">
@@ -58,12 +59,16 @@
               'sharper-top':(msgList[i-1] && msgList[i-1].userId === chat.userId),
               'sharper-bottom':(msgList[i+1] && msgList[i+1].userId === chat.userId)}">
                 <p class="ion-text-wrap" class="ion-padding" >{{chat.message}}</p>
+                
+                
                 <div class="corner-parent-left">
                   <div class="corner-child-left">
                   </div>
                 </div>
+                
               </div>
             </ion-label>
+            
             <div class="imageAvatarBottom">
               <ion-avatar class="avatar" [ngClass]="(msgList[i+1] && msgList[i+1].userId === chat.userId)?'hidden':''">
                 <div class="imageAvatarBottomIcon">
@@ -75,10 +80,13 @@
           </div>
         </ion-col>
       </ion-row>
+      
       <ion-row *ngIf="((msgList[i+1] && msgList[i+1].userId !== chat.userId)|| !msgList[i+1])">
-        <ion-col>
+        <div *ngIf="clickedImage">
+          <ion-img [src]="clickedImage"></ion-img>
+        </div>
           <ion-text>{{chat.time}}</ion-text>
-        </ion-col>
+        
       </ion-row>
     </div>
   </ion-list>
@@ -111,15 +119,12 @@
       </div>
     </ion-col>
   </ion-row>
-  <div class="conteiner">
-  <p>Lat: {{lat}}, Lng: {{lng}}</p>
-  <ion-button href="/geolocation">geolocation</ion-button>
-</div>
 </ion-content>
 
 <ion-footer translucent>
   <ion-item>
-    <ion-icon slot="start" name="camera" expand="icon-only" class="footerIcon"></ion-icon>
-    <ion-input class="input-box" type="text" placeholder="Write a message..." [(ngModel)]="user_input" (keypress)="userTyping($event)"></ion-input>
+    
+    <ion-icon slot="start" name="camera" isActive="true" class="footerIcon" (click)="takePhoto()"></ion-icon>
+    <ion-input class="input-box" type="text" placeholder="Write a message..." [(ngModel)]="user_input" (keypress)="userTyping($event)" ></ion-input>
   </ion-item>
 </ion-footer>
